@@ -3,7 +3,7 @@
 // Tested entry point:  nextflow run main.nf -profile test,conda
 nextflow.enable.dsl = 2
 
-params.reads     = "data/test/*_R{1,2}.fastq.gz"
+params.reads     = "data/test/*_R{1,2}.fastq"
 params.reference = "data/test/reference.fa"
 params.snpeff_db = null            // e.g. "hg38"; null = skip annotation
 params.min_qual  = 20
@@ -23,7 +23,9 @@ process FASTQC {
 process TRIM {
     conda 'bioconda::fastp=0.23.4'
     input:  tuple val(sample), path(reads)
-    output: tuple val(sample), path("${sample}_trim_R{1,2}.fastq.gz")
+    output:
+        tuple val(sample), path("${sample}_trim_R{1,2}.fastq.gz"), emit: reads
+        path "${sample}.fastp.html", emit: report
     script:
     """
     fastp -i ${reads[0]} -I ${reads[1]} \
@@ -52,7 +54,8 @@ process ALIGN {
     script:
     """
     bwa mem -t 2 ${ref} ${reads[0]} ${reads[1]} | \
-        samtools sort - | samtools markdup -r - ${sample}.bam
+        samtools sort -o ${sample}.sorted.bam -
+    samtools markdup -r ${sample}.sorted.bam ${sample}.bam
     samtools index ${sample}.bam
     """
 }
@@ -108,9 +111,9 @@ workflow {
     FASTQC(reads_ch)
     TRIM(reads_ch)
     INDEX_REF(ref_ch)
-    ALIGN(TRIM.out, INDEX_REF.out)
+    ALIGN(TRIM.out.reads, INDEX_REF.out)
     CALL_VARIANTS(ALIGN.out, INDEX_REF.out)
     FILTER_VARIANTS(CALL_VARIANTS.out)
     ANNOTATE(FILTER_VARIANTS.out)
-    MULTIQC(FASTQC.out.collect().ifEmpty([]))
+    MULTIQC(FASTQC.out.collect().concat(TRIM.out.report.collect()))
 }

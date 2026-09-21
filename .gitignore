@@ -15,6 +15,9 @@ data/processed/
 *.h5ad
 *.parquet
 
+# Except: small committed pipeline test fixtures
+!pipelines/ngs-variant/data/test/
+
 # Python
 __pycache__/
 *.py[cod]
