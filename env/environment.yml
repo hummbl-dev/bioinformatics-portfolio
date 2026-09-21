@@ -1,0 +1,35 @@
+name: bioport
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.11
+  # core
+  - numpy
+  - pandas
+  - scipy
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - jupyterlab
+  # bioinformatics
+  - biopython
+  - pysam
+  - cyvcf2
+  - fastqc
+  - multiqc
+  - fastp
+  - bwa
+  - samtools
+  - bcftools
+  - snpeff
+  # stats / differential expression via R side
+  - r-base
+  - bioconductor-deseq2
+  - r-tidyverse
+  - r-irkernel
+  # workflow
+  - nextflow
+  - pytest
+  - pip

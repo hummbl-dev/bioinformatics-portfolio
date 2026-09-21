@@ -1,0 +1,14 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: mamba-org/setup-micromamba@v1
+        with:
+          environment-file: env/environment.yml
+          environment-name: bioport
+      - name: tests
+        run: |
+          micromamba run -n bioport python -m pytest -q

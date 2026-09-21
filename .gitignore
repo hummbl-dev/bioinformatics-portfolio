@@ -1,0 +1,35 @@
+# Data (manifests only — never commit raw data)
+data/raw/
+data/interim/
+data/processed/
+*.bam
+*.cram
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.vcf
+*.vcf.gz
+*.bcf
+*.h5
+*.h5ad
+*.parquet
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# R
+.RData
+.Rhistory
+.Rproj.user/
+
+# Env/OS
+.env
+.DS_Store
+Thumbs.db

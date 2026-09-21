@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Bioinformatics Proof-of-Work Portfolio"
+type: software
+license: MIT
+repository-code: "https://github.com/OWNER/bioinformatics-portfolio"
+abstract: >-
+  Reproducible bioinformatics and computational biology artifacts:
+  sequence algorithms, NGS pipelines, applied biostatistics, ML for
+  biology, and a reproduction study of a published omics analysis.
