@@ -17,11 +17,25 @@ FASTQ (1000 Genomes subset)
   → report        MultiQC + summary notebook
 ```
 
+## Status
+
+- Nextflow DSL2 pipeline written (`main.nf`): FastQC → fastp → BWA-MEM
+  → markdup → bcftools call → QUAL filter → snpEff → MultiQC
+- `scripts/make_test_data.py` generates a 20 kb synthetic reference +
+  2×1985×150bp reads with **40 planted SNVs + `truth.vcf`** — done,
+  verified (identical read counts, real sequence lines)
+- Execution requires the conda env (`env/environment.yml`) or Docker
+  image — bwa/samtools/bcftools are not installed on the dev host;
+  `nextflow run main.nf -profile test,conda` is the validation command
+- Validation target: recall of `truth.vcf` calls ≥ threshold; results
+  go in `results_test/` + a verified-concordance note here
+
 ## Standard
 
 - Data: chromosome-bounded 1000 Genomes exome/WGS subset (see
   `data/MANIFEST.md` C3) — small enough for a workstation
-- Orchestration: Nextflow or Snakemake (pick one, justify in README)
+- Orchestration: Nextflow DSL2 — aligns with the nf-core ecosystem
+  that hosts the planned OSS contributions
 - Containers: workflow runs inside `env/Dockerfile` image
 - Validation: genotype concordance vs published 1000G calls on the
   same samples — the "did the pipeline get the right answer" number

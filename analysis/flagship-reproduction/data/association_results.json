@@ -1,0 +1,152 @@
+[
+ {
+  "gene": "TP53",
+  "subtype": "BRCA_LumA",
+  "mutated": 53,
+  "n": 499,
+  "freq": 0.1062,
+  "odds_ratio": 0.079,
+  "p": 2.3195677083251402e-63,
+  "p_adj_bh": 0.0
+ },
+ {
+  "gene": "TP53",
+  "subtype": "BRCA_Basal",
+  "mutated": 153,
+  "n": 171,
+  "freq": 0.8947,
+  "odds_ratio": 27.737,
+  "p": 9.432661652352246e-61,
+  "p_adj_bh": 0.0
+ },
+ {
+  "gene": "PIK3CA",
+  "subtype": "BRCA_Basal",
+  "mutated": 12,
+  "n": 171,
+  "freq": 0.0702,
+  "odds_ratio": 0.11,
+  "p": 2.757518691215777e-20,
+  "p_adj_bh": 0.0
+ },
+ {
+  "gene": "PIK3CA",
+  "subtype": "BRCA_LumA",
+  "mutated": 237,
+  "n": 499,
+  "freq": 0.4749,
+  "odds_ratio": 3.248,
+  "p": 1.8152555513621122e-17,
+  "p_adj_bh": 0.0
+ },
+ {
+  "gene": "GATA3",
+  "subtype": "BRCA_Basal",
+  "mutated": 0,
+  "n": 171,
+  "freq": 0.0,
+  "odds_ratio": 0.0,
+  "p": 3.2290118916570883e-11,
+  "p_adj_bh": 0.0
+ },
+ {
+  "gene": "TP53",
+  "subtype": "BRCA_Her2",
+  "mutated": 55,
+  "n": 78,
+  "freq": 0.7051,
+  "odds_ratio": 5.106,
+  "p": 3.5509725664964366e-11,
+  "p_adj_bh": 0.0
+ },
+ {
+  "gene": "GATA3",
+  "subtype": "BRCA_LumB",
+  "mutated": 40,
+  "n": 197,
+  "freq": 0.203,
+  "odds_ratio": 2.242,
+  "p": 0.00023620334891988099,
+  "p_adj_bh": 0.000506
+ },
+ {
+  "gene": "GATA3",
+  "subtype": "BRCA_LumA",
+  "mutated": 77,
+  "n": 499,
+  "freq": 0.1543,
+  "odds_ratio": 1.863,
+  "p": 0.002408683362205247,
+  "p_adj_bh": 0.004516
+ },
+ {
+  "gene": "GATA3",
+  "subtype": "BRCA_Normal",
+  "mutated": 0,
+  "n": 36,
+  "freq": 0.0,
+  "odds_ratio": 0.0,
+  "p": 0.016426872271721772,
+  "p_adj_bh": 0.027378
+ },
+ {
+  "gene": "GATA3",
+  "subtype": "BRCA_Her2",
+  "mutated": 3,
+  "n": 78,
+  "freq": 0.0385,
+  "odds_ratio": 0.269,
+  "p": 0.017634466940470293,
+  "p_adj_bh": 0.026452
+ },
+ {
+  "gene": "PIK3CA",
+  "subtype": "BRCA_Normal",
+  "mutated": 8,
+  "n": 36,
+  "freq": 0.2222,
+  "odds_ratio": 0.523,
+  "p": 0.11223311328132142,
+  "p_adj_bh": 0.153045
+ },
+ {
+  "gene": "PIK3CA",
+  "subtype": "BRCA_LumB",
+  "mutated": 59,
+  "n": 197,
+  "freq": 0.2995,
+  "odds_ratio": 0.757,
+  "p": 0.11246183268210107,
+  "p_adj_bh": 0.140577
+ },
+ {
+  "gene": "TP53",
+  "subtype": "BRCA_Normal",
+  "mutated": 11,
+  "n": 36,
+  "freq": 0.3056,
+  "odds_ratio": 0.812,
+  "p": 0.7221155291262754,
+  "p_adj_bh": 0.83321
+ },
+ {
+  "gene": "TP53",
+  "subtype": "BRCA_LumB",
+  "mutated": 71,
+  "n": 197,
+  "freq": 0.3604,
+  "odds_ratio": 1.061,
+  "p": 0.7385350341819521,
+  "p_adj_bh": 0.791288
+ },
+ {
+  "gene": "PIK3CA",
+  "subtype": "BRCA_Her2",
+  "mutated": 26,
+  "n": 78,
+  "freq": 0.3333,
+  "odds_ratio": 0.929,
+  "p": 0.8055988960555265,
+  "p_adj_bh": 0.805599
+ }
+]
