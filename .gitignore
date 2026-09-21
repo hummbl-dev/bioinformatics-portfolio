@@ -16,7 +16,9 @@ data/processed/
 *.parquet
 
 # Except: small committed pipeline test fixtures
-!pipelines/ngs-variant/data/test/
+!pipelines/ngs-variant/data/test/*.fastq
+!pipelines/ngs-variant/data/test/*.vcf
+!pipelines/ngs-variant/data/test/*.fa
 
 # Python
 __pycache__/
