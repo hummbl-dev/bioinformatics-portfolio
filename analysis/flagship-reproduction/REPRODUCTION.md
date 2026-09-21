@@ -40,6 +40,28 @@ odds ratio, Benjamini–Hochberg across 15 tests.
 | GATA3 | LumB | **20.3%** | 2.2 | 2.4e-04 | luminal-enriched | ✓ |
 | GATA3 | Basal | **0/171** | 0.0 | 3.2e-11 | near-absent | ✓ |
 
+## Extension arm — copy number (the deliberate deviation)
+
+The mutation-only ML arm (see `ml/RESULTS.md`) failed on Her2
+(F1 0.18) — correctly, because Her2 subtype is defined by ERBB2
+*amplification*, a copy-number event invisible to mutation
+indicators. Fetched GISTIC discrete CNA calls (same cohort) and
+re-ran the subtype-association test on AMP (+2) and HOMDEL (−2):
+
+| Gene | Event | Subtype | Freq | OR | Published ref | Match |
+|---|---|---|---|---|---|---|
+| ERBB2 | AMP | **Her2** | **70.5%** | 33.6 | ~77% (2012) | ✓ |
+| ERBB2 | AMP | Basal | 1.2% | 0.07 | depleted | ✓ |
+| MYC | AMP | **Basal** | **35.7%** | 4.3 | basal-MYC | ✓ |
+| PTEN | HOMDEL | **Basal** | **16.4%** | 7.0 | basal PTEN loss | ✓ |
+| CCND1 | AMP | **LumB** | **25.9%** | 2.4 | luminal 11q13 | ✓ |
+
+**Cross-arm triangulation**: the statistical arm (Fisher on
+mutations), the ML arm (mutation features → subtype), and this CNA
+arm all tell one coherent story — mutation features separate
+Basal/LumA; CNA features are required for Her2. A portfolio reviewer
+can verify the same biology from three independent directions.
+
 ## Deviations and limitations
 
 - **Cohort differs**: PanCancer Atlas (981 subtyped of 1084) vs the

@@ -53,9 +53,13 @@ Mutation-only classification recovering Basal (TP53) and LumA
 ML terms: those are the only subtypes with a strong mutation signal.
 This agreement between the statistical and ML arms is the result.
 
-## Next iteration (documented, not yet run)
+## Next iteration
 
-- Add GISTIC amp/del calls per gene → should fix Her2 specifically
+- ~~Add GISTIC amp/del calls per gene~~ — **done in the flagship
+  extension arm** (`analysis/flagship-reproduction/REPRODUCTION.md`):
+  ERBB2-AMP recovers 70.5% of Her2 (OR 33.6), confirming the
+  diagnosed failure mode. Next model iteration should concatenate
+  mutation + CNA features.
 - Merge Normal into analysis as descriptive-only or drop
 - Gradient boosting / calibrated probabilities for subtype
   probability outputs
