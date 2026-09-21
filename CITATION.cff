@@ -2,6 +2,9 @@ cff-version: 1.2.0
 message: "If you use this work, please cite it as below."
 title: "Bioinformatics Proof-of-Work Portfolio"
 type: software
+authors:
+  - family-names: Bowlby
+    given-names: Reuben P.
 license: MIT
 repository-code: "https://github.com/OWNER/bioinformatics-portfolio"
 abstract: >-
