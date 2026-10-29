@@ -47,7 +47,7 @@ def main():
         """Paired-end fragments: mates from opposite ends of a ~350bp
         insert, each fragment drawn from ref or mutant haplotype 50/50
         (models heterozygous SNVs). Yields (name, r1, r2)."""
-        step = max(1, INSERT * 2 // DEPTH)
+        step = max(1, READ_LEN * 2 // DEPTH)
         for i in range(0, REF_LEN - INSERT, step):
             hap = ref if rng.random() < 0.5 else sample
             yield (f"@frag_{i}", hap[i:i + READ_LEN],
