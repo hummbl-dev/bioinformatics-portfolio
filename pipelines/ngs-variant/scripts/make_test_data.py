@@ -15,6 +15,7 @@ from pathlib import Path
 OUT = Path(__file__).resolve().parents[1] / "data" / "test"
 REF_LEN = 20_000
 READ_LEN = 150
+INSERT = 350
 DEPTH = 30
 N_VARIANTS = 40
 
@@ -37,32 +38,39 @@ def main():
         sample[pos] = alt
     sample = "".join(sample)
 
-    def reads(seq, tag):
-        """Unpaired reads spanning the sequence at ~DEPTH/2 coverage."""
-        for i in range(0, len(seq) - READ_LEN,
-                       max(1, READ_LEN * 2 // DEPTH)):
-            yield f"@{tag}_{i}", seq[i:i + READ_LEN]
+    comp = str.maketrans("ACGT", "TGCA")
 
-    # diploid: R1 drawn from ref, R2 from mutated haplotype
-    with open(OUT / "sample_R1.fastq", "w") as f:
-        for name, seq in reads(ref, "r1"):
-            f.write(f"{name}\n{seq}\n+\n{'I' * len(seq)}\n")
-    with open(OUT / "sample_R2.fastq", "w") as f:
-        for name, seq in reads(sample, "r2"):
-            f.write(f"{name}\n{seq}\n+\n{'I' * len(seq)}\n")
+    def revcomp(s):
+        return s.translate(comp)[::-1]
 
-    with open(OUT / "reference.fa", "w") as f:
+    def fragments():
+        """Paired-end fragments: mates from opposite ends of a ~350bp
+        insert, each fragment drawn from ref or mutant haplotype 50/50
+        (models heterozygous SNVs). Yields (name, r1, r2)."""
+        step = max(1, READ_LEN * 2 // DEPTH)
+        for i in range(0, REF_LEN - INSERT, step):
+            hap = ref if rng.random() < 0.5 else sample
+            yield (f"@frag_{i}", hap[i:i + READ_LEN],
+                   revcomp(hap[i + INSERT - READ_LEN:i + INSERT]))
+
+    with open(OUT / "sample_R1.fastq", "w", newline="\n") as f1, \
+            open(OUT / "sample_R2.fastq", "w", newline="\n") as f2:
+        for name, r1, r2 in fragments():
+            f1.write(f"{name}/1\n{r1}\n+\n{'I' * len(r1)}\n")
+            f2.write(f"{name}/2\n{r2}\n+\n{'I' * len(r2)}\n")
+
+    with open(OUT / "reference.fa", "w", newline="\n") as f:
         f.write(">synth\n")
         for i in range(0, REF_LEN, 60):
             f.write(ref[i:i + 60] + "\n")
 
-    with open(OUT / "truth.vcf", "w") as f:
+    with open(OUT / "truth.vcf", "w", newline="\n") as f:
         f.write("##fileformat=VCFv4.2\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\n")
         for pos, (r, a) in variants.items():
             f.write(f"synth\t{pos + 1}\t.\t{r}\t{a}\t100\n")
 
     print(f"wrote {OUT}: ref {REF_LEN}bp, {N_VARIANTS} planted SNVs, "
-          f"{len(list(reads(ref, 'x')))} reads/haplotype")
+          f"{len(list(fragments()))} fragments")
 
 
 if __name__ == "__main__":

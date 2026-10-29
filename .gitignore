@@ -52,3 +52,17 @@ venv/
 .env
 .DS_Store
 Thumbs.db
+
+# Nextflow runtime
+.nextflow/
+.nextflow.log*
+work/
+results_test/
+
+# Generated alignment indices (test fixtures rebuild these)
+pipelines/ngs-variant/data/test/*.fai
+pipelines/ngs-variant/data/test/*.amb
+pipelines/ngs-variant/data/test/*.ann
+pipelines/ngs-variant/data/test/*.bwt
+pipelines/ngs-variant/data/test/*.pac
+pipelines/ngs-variant/data/test/*.sa
