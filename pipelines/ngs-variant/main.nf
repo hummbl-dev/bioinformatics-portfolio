@@ -25,12 +25,12 @@ process TRIM {
     input:  tuple val(sample), path(reads)
     output:
         tuple val(sample), path("${sample}_trim_R{1,2}.fastq.gz"), emit: reads
-        path "${sample}.fastp.html", emit: report
+        path "${sample}.fastp.json", emit: report
     script:
     """
     fastp -i ${reads[0]} -I ${reads[1]} \
         -o ${sample}_trim_R1.fastq.gz -O ${sample}_trim_R2.fastq.gz \
-        -h ${sample}.fastp.html
+        -h ${sample}.fastp.html -j ${sample}.fastp.json
     """
 }
 
@@ -84,7 +84,6 @@ process FILTER_VARIANTS {
 
 process ANNOTATE {
     conda 'bioconda::snpeff=5.2'
-    when: params.snpeff_db != null
     input:  tuple val(sample), path(vcf)
     output: tuple val(sample), path("${sample}.annotated.vcf")
     script:
@@ -114,6 +113,8 @@ workflow {
     ALIGN(TRIM.out.reads, INDEX_REF.out)
     CALL_VARIANTS(ALIGN.out, INDEX_REF.out)
     FILTER_VARIANTS(CALL_VARIANTS.out)
-    ANNOTATE(FILTER_VARIANTS.out)
+    if (params.snpeff_db != null) {
+        ANNOTATE(FILTER_VARIANTS.out)
+    }
     MULTIQC(FASTQC.out.collect().concat(TRIM.out.report.collect()))
 }
