@@ -20,6 +20,20 @@ data/processed/
 !pipelines/ngs-variant/data/test/*.vcf
 !pipelines/ngs-variant/data/test/*.fa
 
+# Nextflow pipeline runtime residue (issue #1: zero test residue)
+.nextflow/
+.nextflow.log
+pipelines/**/work/
+pipelines/**/results_test/
+
+# BWA / samtools reference indexes (generated from reference.fa)
+*.bwt
+*.pac
+*.sa
+*.amb
+*.ann
+*.fai
+
 # Python
 __pycache__/
 *.py[cod]
