@@ -1,0 +1,15 @@
+schema: hummbl-repo-manifest@0.1
+repo:
+  name: bioinformatics-portfolio
+  visibility: private
+  status: dormant
+  remote: https://github.com/hummbl-dev/bioinformatics-portfolio.git
+purpose:
+  type: unresolved
+  summary: backfilled registration stub - purpose not yet declared
+authority:
+  owner: reuben
+governance:
+  backfilled: true
+  backfill_date: 2026-10-14
+  index_verdict: FAIL:wip
